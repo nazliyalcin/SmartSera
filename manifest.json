@@ -1,0 +1,21 @@
+{
+    "name": "Smart Sera",
+    "short_name" : "SmartSera",
+    "start_url": "index.html?utm_source=homescreen",
+    "scope" : "./",
+    "icons": [
+        {
+            "src": "img/greenhouse-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "img/greenhouse-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffee00",
+    "background_color": "#ffee00",
+    "display": "standalone"
+}

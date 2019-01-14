@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <!-- Aframe -->
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.min.js"></script> -->
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script> 
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!-- Ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <!-- Physics -->
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/components/sphere-collider.js"></script>
+    <!-- Line -->
+    <script src="https://unpkg.com/aframe-line-component/dist/aframe-line-component.min.js"></script>
+    <!-- Curve  -->
+   
+    <script src="https://unpkg.com/aframe-curve-component/dist/aframe-curve-component.min.js"></script>
+
+     <!-- Embedded -->
+    <script src="js/aframe-material.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/switch.css">
+
+    <link rel="manifest" href="manifest.json">
+    
+  </head>
+  <body>
+    <script type="text/javascript" src="js/methods.js"></script>
+   
+    <img id="logo" src="img/ericsson_logo.png" style='left:0%;top:0px; z-index:2; position:fixed; display:none;' /> 
+    <label id="text" style=' position:fixed;width:10%; z-index: 2; display:none;color:white;'>Smart Sera</label>
+    <img id="banner" src="img/black-banner.png" style='top:0px; z-index:1; position:fixed;display:none;' /> 
+    <label id="switch" style=' position:fixed;top:10px; z-index: 1; display:none;'>
+        <input type="checkbox" style='display:none;' >
+        <span class="slider round"></span>
+    </label>
+
+
+    <a-scene artoolkit embedded arjs='trackingMethod: best;debugUIEnabled: false;' > 
+          
+          <a-assets>
+              <img id="arrow" src="img/arrows.png" /> 
+              <img id="temperature" src="img/temperature.png" /> 
+              <img id="humidity" src="img/humidity.png" /> 
+              <img id="loudness" src="img/loudness.png" /> 
+              <img id="illuminance" src="img/illuminance.png" /> 
+          </a-assets>
+
+     
+          
+             
+          <a-marker id="vuforia" preset="custom" type='pattern' url='img/ericsson.patt' iot > 
+
+            
+           
+            <!-- Temperature-->
+            <a-image src="#temperature"  scale="2 2 0" rotation="-90 0 0" position="-2.0 0 -1.5"> </a-image>
+            <a-text id="text_temparature"  width="4" rotation="-90 0 0 "  position="-2.2 0.1 -1.2" ></a-text>
+            <a-text  width="3" rotation="-90 0 0 " value="Actual Temperature" position="-2.5 0.1 -0.80" ></a-text>
+            <!-- Illuminance -->
+            <a-image src="#illuminance"  scale="2 2 0" rotation="-90 0 0" position="2.0 0 -1.5"> </a-image>
+            <a-text id="text_illuminance"  width="4" rotation="-90 0 0 "  position="1.8 0.1 -1.2" ></a-text>
+            <a-text  width="3" rotation="-90 0 0 " value="Illuminance" position="1.7 0.1 -0.80" ></a-text>
+            <!-- Loudness -->
+            <a-image src="#loudness" scale="2 2 0" rotation="-90 0 0" position="-2.0 0 1.5"> </a-image>
+            <a-text id="text_loudness"  width="4" rotation="-90 0 0 "  position="-2.2 0.1 1.8" ></a-text>
+            <a-text  width="3" rotation="-90 0 0 " value="Loudness" position="-2.3 0.1 2.1" ></a-text>
+            <!-- Humidity -->
+            <a-image src="#humidity"  scale="2 2 0" rotation="-90 0 0" position="2.0 0 1.5"> </a-image>
+            <a-text id="text_humidity"  width="4" rotation="-90 0 0 "  position="1.8 0.1 1.8" ></a-text>
+            <a-text  width="3" rotation="-90 0 0 " value="Humidity" position="1.7 0.1 2.1" ></a-text>
+            
+
+            <!-- Arrows -->
+            <a-image src="#arrow" rotation="-90 0 0 " scale="2 2 0"> </a-image>
+        
+            
+            <a-box id="background" depth="0.01" height="3" width="3" rotation="-90 0 0 "
+                position="0.3 1 -0.25" opacity="0" ></a-box>
+
+            <!-- Bar Chart *******************************************************************    -->
+
+          
+            
+             <!-- X Line -->
+             <a-entity id="graph_line0" line="start: -0.6 1.5 1.1; end: 1.2 1.5 1.1; color: black; opacity:0" ></a-entity>
+             <a-entity id="graph_line1" line="start: -0.6 1.5 -1.1; end: 1.2 1.5 -1.1; color: black; opacity:0" ></a-entity>
+             <a-entity id="graph_line2" line="start: -0.6 1.5 -0.4; end: 1.2 1.5 -0.4; color: black; opacity:0 " ></a-entity>
+             <a-entity id="graph_line3" line="start: -0.6 1.5 -0.6; end: 1.2 1.5 -0.6; color: black; opacity:0" ></a-entity>
+             <a-entity id="graph_line4" line="start: -0.6 1.5 -0.1; end: 1.2 1.5 -0.1; color: black; opacity:0" ></a-entity>
+             <a-entity id="graph_line5" line="start: -0.6 1.5 0.4; end: 1.2 1.5 0.4; color: black; opacity:0" ></a-entity>
+   
+             <!-- Z Line -->  
+            <a-entity id="graph_line6" line="start: -0.6 1.5 -1.4; end: -0.6 1.5 1.1; color: black ; opacity:0" ></a-entity>
+
+            <!-- Values -->
+            <a-text id="text_height0" width="1.8" ></a-text>
+            <a-text id="text_height1" width="1.8" ></a-text>
+            <a-text id="text_height2" width="1.8" ></a-text>
+            <a-text id="text_height3" width="1.8" ></a-text>
+            <a-text id="text_height4" width="1.8" ></a-text>
+
+              <!-- 2014  -->
+              
+              <a-text id="text0" rotation="-90 0 0 " value="2014" color="black"  width="1.5" opacity="0"></a-text>
+
+              <a-box id="box0" depth="0.1" height="1" width="0.1" rotation="-90 0 0 "
+              color="tomato" opacity="0"> </a-box>
+              <!-- 2015 -->
+              <a-text id="text1" rotation="-90 0 0 " value="2015" color="black" width="1.5" opacity="0"></a-text>
+  
+              <a-box id="box1" depth="0.1" height="1" width="0.1" rotation="-90 0 0 "
+              color="green" opacity="0"></a-box>
+               <!-- 2016 -->
+              <a-text id="text2" rotation="-90 0 0 " value="2016" color="black"  width="1.5" opacity="0"></a-text>
+  
+              <a-box id="box2" depth="0.1" height="1" width="0.1" rotation="-90 0 0 "
+              color="blue" opacity="0"></a-box>
+               <!-- 2017 -->
+              <a-text id="text3" rotation="-90 0 0 " value="2017" color="black"  width="1.5" opacity="0"></a-text>
+  
+              <a-box id="box3" depth="0.1" height="1" width="0.1" rotation="-90 0 0 "
+              color="gray" opacity="0"></a-box>
+             
+              
+
+          </a-marker> 
+
+          
+        
+            <a-entity id="camera" camera> </a-entity>
+            <a-entity laser-controls="hand: right"></a-entity>
+
+        
+              
+	 </a-scene>
+
+   
+
+    
+  <body>
+</html>
