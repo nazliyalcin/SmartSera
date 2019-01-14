@@ -1,7 +1,7 @@
 {
     "name": "Smart Sera",
     "short_name" : "SmartSera",
-    "start_url": "index.html?utm_source=homescreen",
+    "start_url": "https://nazliyalcin.github.io/SmartSera/",
     "scope" : "./",
     "icons": [
         {
