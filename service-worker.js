@@ -3,7 +3,7 @@ console.log("SW Installed..");
 event.waitUntil(caches.open('static').then(function(cache){
   cache.add('/');
   cache.add('/index.html');
-  cache.add('/js/methods.js');
+  cache.add('methods.js');
   cache.add('/css/switch.css');
   cache.add('/src/img/arrows.png');
   cache.add('/src/img/black-banner.png');
