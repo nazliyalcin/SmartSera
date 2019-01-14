@@ -41,7 +41,7 @@ AFRAME.registerComponent('iot', {
 
       // Service Worker
     if ('serviceWorker' in navigator) { 
-     navigator.serviceWorker.register('/service-worker.js').then(function(){
+     navigator.serviceWorker.register('./service-worker.js').then(function(){
          console.log("SW registered--------------");
      });
 
