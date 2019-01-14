@@ -25,3 +25,17 @@ event.waitUntil(caches.open('static').then(function(cache){
 self.addEventListener('activate',function(){
 console.log("SW Activate");
 });
+
+self.addEventListener('fetch',function(event){
+event.respondWidth(
+caches.match(event.request).then(function(res){
+  if(res)
+  {
+    return res;
+  }else
+  {
+    return fetch(event.request);
+  }
+})
+);
+});
