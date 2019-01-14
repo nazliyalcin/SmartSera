@@ -27,7 +27,7 @@ console.log("SW Activate");
 });
 
 self.addEventListener('fetch',function(event){
-event.respondWidth(
+event.respondWith(
 caches.match(event.request).then(function(res){
   if(res)
   {
